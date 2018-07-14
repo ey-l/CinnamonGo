@@ -6,8 +6,6 @@ try:
 except ImportError:
     import gobject as GObject
 
-from Adafruit_LED_Backpack import BicolorMatrix8x8
-
 from bluez_components import *
 
 mainloop = None
@@ -182,8 +180,8 @@ def main():
     ad_manager = get_ad_manager(bus)
 
     # Create gatt services
-    display = setup_display()
-    app = LedApplication(bus, display)
+    # display = setup_display()
+    # app = LedApplication(bus, display)
 
     # Create advertisement
     test_advertisement = LedAdvertisement(bus, 0)
