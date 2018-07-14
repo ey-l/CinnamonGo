@@ -73,7 +73,7 @@ def set_display_row(display, row, byte_values):
     -------+-----+-----+-----+-----+-----+-----+-----+-----
     Byte   |           0           |           1
     """
-    printf "Displaying" + row + " value" + byte_values
+    print 'Displaying' + str(row) + ' value' + str(byte_values)
 
 class RowChrc(Characteristic):
     ROW_UUID = '12345678-1234-5678-1234-56789abc000'
