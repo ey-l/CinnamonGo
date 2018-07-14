@@ -6,16 +6,32 @@ try:
 except ImportError:
     import gobject as GObject
 
+from sense_hat import SenseHat
+
 from bluez_components import *
 
 mainloop = None
 
 COLOR_TABLE = {
-    0: BicolorMatrix8x8.OFF,
-    1: BicolorMatrix8x8.RED,
-    2: BicolorMatrix8x8.GREEN,
-    3: BicolorMatrix8x8.YELLOW
+    0: [0, 0, 0],
+    1: [255, 0, 0],
+    2: [0, 255, 0],
+    3: [255, 255, 0]
 }
+
+X = [255, 255, 255]  # White/ On
+O = [0, 0, 0]  # Black/ Off
+
+CLEAR_SCREEN = [
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, O, O, O
+]
 
 
 def int_to_hex(int_value):
@@ -40,7 +56,7 @@ def int_to_hex(int_value):
 
 
 def set_display_pixel(display, row, column, value):
-    display.set_pixel(column, row, COLOR_TABLE[value])
+    printf "Display row: " + row + " and col " + column + " and value" + value
 
 
 def set_display_row(display, row, byte_values):
@@ -57,26 +73,7 @@ def set_display_row(display, row, byte_values):
     -------+-----+-----+-----+-----+-----+-----+-----+-----
     Byte   |           0           |           1
     """
-    pixel_0 = byte_values[0] >> 6
-    pixel_1 = (byte_values[0] & 0x30) >> 4
-    pixel_2 = (byte_values[0] & 0x0c) >> 2
-    pixel_3 = (byte_values[0] & 0x03)
-
-    pixel_4 = byte_values[1] >> 6
-    pixel_5 = (byte_values[1] & 0x30) >> 4
-    pixel_6 = (byte_values[1] & 0x0c) >> 2
-    pixel_7 = (byte_values[1] & 0x03)
-
-    set_display_pixel(display, row, 0, pixel_0)
-    set_display_pixel(display, row, 1, pixel_1)
-    set_display_pixel(display, row, 2, pixel_2)
-    set_display_pixel(display, row, 3, pixel_3)
-    set_display_pixel(display, row, 4, pixel_4)
-    set_display_pixel(display, row, 5, pixel_5)
-    set_display_pixel(display, row, 6, pixel_6)
-    set_display_pixel(display, row, 7, pixel_7)
-    display.write_display()
-
+    printf "Displaying" + row + " value" + byte_values
 
 class RowChrc(Characteristic):
     ROW_UUID = '12345678-1234-5678-1234-56789abc000'
@@ -128,15 +125,6 @@ class LedAdvertisement(Advertisement):
         self.add_service_uuid(LedService.LED_SVC_UUID)
         self.include_tx_power = True
 
-
-def setup_display():
-    display = BicolorMatrix8x8.BicolorMatrix8x8()
-    display.begin()
-    display.clear()
-    display.write_display()
-    return display
-
-
 def register_ad_cb():
     """
     Callback if registering advertisement was successful
@@ -170,6 +158,7 @@ def register_app_error_cb(error):
 def main():
     global mainloop
     global display
+    global sense
 
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
@@ -179,9 +168,11 @@ def main():
     service_manager = get_service_manager(bus)
     ad_manager = get_ad_manager(bus)
 
+	# Setup sensehat
+    sense = SenseHat()
+    
     # Create gatt services
-    # display = setup_display()
-    # app = LedApplication(bus, display)
+    app = LedApplication(bus, sense)
 
     # Create advertisement
     test_advertisement = LedAdvertisement(bus, 0)
@@ -201,8 +192,7 @@ def main():
     try:
         mainloop.run()
     except KeyboardInterrupt:
-        display.clear()
-        display.write_display()
+        display.setpixels(CLEAR_SCREEN)
 
 
 if __name__ == '__main__':
