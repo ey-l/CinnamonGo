@@ -56,7 +56,7 @@ def int_to_hex(int_value):
 
 
 def set_display_pixel(display, row, column, value):
-    printf "Display row: " + row + " and col " + column + " and value" + value
+    print 'Display row: ' + str(row) + ' and col ' + str(column) + ' and value' + str(value)
 
 
 def set_display_row(display, row, byte_values):
