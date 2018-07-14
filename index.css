@@ -1,0 +1,39 @@
+body {
+	background: #ffffff;
+	text-align: center;
+}
+
+#body{
+	display: block;
+	margin: auto;
+	padding: 10px;
+	padding-bottom: 0;
+	width: 60%;
+	border: solid 1px gray;
+}
+
+ul {
+	list-style-type: none;
+    margin: auto;
+    padding: 0;
+	width: 90%;
+    border: 1px solid #b8b8b8;
+}
+
+li {
+	padding: 10px;
+}
+
+li:hover {
+	background-color: #b8b8b8;
+	cursor: pointer; 
+}
+
+#readytogo {
+	border: 0;
+	padding: 5px;
+	font-size: 50px;
+}
+
+#selectable .ui-selecting { background: #b8b8b8; }
+#selectable .ui-selected { background: #b8b8b8; }
