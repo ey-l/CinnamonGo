@@ -138,3 +138,16 @@ function GetJSON(url) {
 */
 
 Start();
+
+web3 = new Web3(new Web3.providers.HttpProvider("http://216.71.221.203:8545"));
+fs = require('fs');
+code = fs.readFileSync('cinnamongo.sol').toString();
+solc = require('solc');
+compiledCode = solc.compile(code);
+abiDefinition = JSON.parse(compiledCode.contracts[':CinnamonGo'].interface);
+Contract = web3.eth.contract(abiDefinition);
+byteCode = compiledCode.contracts[':CinnamonGo'].bytecode;
+deployedContract = Contract.new(5,{data: byteCode, from: web3.eth.accounts[0], gas: 4700000});
+console.log("CONTRACT DEPLOYED")
+console.log(deployedContract.address);
+contractInstance = Contract.at(deployedContract.address);
