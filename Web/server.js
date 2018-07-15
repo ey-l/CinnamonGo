@@ -1,3 +1,5 @@
+Web3 = require('web3');
+
 // Require express and create an instance of it
 /*=======
 Includes
