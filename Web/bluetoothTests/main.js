@@ -6,6 +6,7 @@
 var connected = false;
 var gattServer = undefined;
 var gattService = undefined;
+var msgToCar = "Hello Car";
 
 /*================================
 
@@ -44,8 +45,21 @@ function connectToCarWithKey(carKey) {
   		let decoder = new TextDecoder('utf-8');
   		document.getElementById("outputDiv").innerText += decoder.decode(value);
   		console.log('User Description: ' + decoder.decode(value));
-  		writeToCar('Hello Car!');
+  		return gattService.getCharacteristic('ffffffff-ffff-ffff-ffff-fffffffffff3');
+  		//writeToCar('Hello Car!');
   	})
+	/*=================
+	Write To Car!
+	==================*/
+	.then(characteristic => characteristic.getDescriptor('ffffffff-ffff-ffff-ffff-fffffffffff4'))
+	.then(descriptor => {
+		let encoder = new TextEncoder('utf-8');
+		let userReply = encoder.encode(msgToCar);
+		return descriptor.writeValue(userReply);
+	})
+	.then(function() {
+		console.log('Written.');
+	})
 	.catch(error => {
 		console.log(error);
   		document.getElementById("outputDiv").innerText += "Error:" + error;		
@@ -61,13 +75,8 @@ function writeToCar(msg) {
 			let userReply = encoder.encode(msg);
 			return descriptor.writeValue(userReply);
 		})
-
-		.then(descriptor => descriptor.readValue())
-		.then(value => {
-			let decoder = new TextDecoder('utf-8');
-			document.getElementById("outputDiv").innerText += decoder.decode(value);
-			console.log('User Description: ' + decoder.decode(value));
-			writeToCar('Hello Car!');
+		.then(function() {
+			console.log('Written.');
 		})
 		.catch(function(err) {
 			console.log(err);
