@@ -62,9 +62,9 @@ function getBatteryLevel() {
 =================================*/
 function connectToCarWithKey(carKey) {
 	navigator.bluetooth.requestDevice({
-  	filters: [{
-    	name: carKey
-  	}],
+		filters: [{
+    		name: carKey
+  		}],
 	})
 	.then(device => { 
 		// Human-readable name of the device.
@@ -72,6 +72,16 @@ function connectToCarWithKey(carKey) {
 
   		// Attempts to connect to remote GATT Server.
   		return device.gatt.connect();
+  		
 	})
+	.then(device => device.gatt.connect())
+	.then(server => server.getPrimaryService('fffffffffffffffffffffffffffffff0'))
+	.then(service => service.getCharacteristic('fffffffffffffffffffffffffffffff1'))
+	.then(characteristic => characteristic.getDescriptor('2901'))
+	.then(descriptor => descriptor.readValue())
+	.then(value => {
+  		let decoder = new TextDecoder('utf-8');
+  		console.log('User Description: ' + decoder.decode(value));
+  	})
 	.catch(error => { console.log(error); });
 }
