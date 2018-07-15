@@ -146,8 +146,4 @@ solc = require('solc');
 compiledCode = solc.compile(code);
 abiDefinition = JSON.parse(compiledCode.contracts[':CinnamonGo'].interface);
 Contract = web3.eth.contract(abiDefinition);
-byteCode = compiledCode.contracts[':CinnamonGo'].bytecode;
-deployedContract = Contract.new(5,{data: byteCode, from: web3.eth.accounts[0], gas: 4700000});
-console.log("CONTRACT DEPLOYED")
-console.log(deployedContract.address);
-contractInstance = Contract.at(deployedContract.address);
+contractInstance = Contract.at(fs.readFileSync('contractaddress.txt').toString());
