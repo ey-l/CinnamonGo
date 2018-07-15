@@ -14,6 +14,8 @@ contract Voting {
   */
   
   bytes32[] public candidateList;
+ uint256 public start;
+ uint256 public end;
 
   /* This is the constructor which will be called once when you
   deploy the contract to the blockchain. When we deploy the contract,
@@ -24,16 +26,18 @@ contract Voting {
   }
 
   // This function returns the total votes a candidate has received so far
-  function totalVotesFor(bytes32 candidate) returns (uint8) {
+  function totalVotesFor(bytes32 candidate) returns (uint256) {
     if (validCandidate(candidate) == false) throw;
-    return votesReceived[candidate];
+    end=block.timestamp;
+    return end-start;
   }
 
   // This function increments the vote count for the specified candidate. This
   // is equivalent to casting a vote
   function voteForCandidate(bytes32 candidate) {
     if (validCandidate(candidate) == false) throw;
-    votesReceived[candidate] += 1;
+    start=block.timestamp;
+    votesReceived[candidate] += 3;
   }
 
   function validCandidate(bytes32 candidate) returns (bool) {

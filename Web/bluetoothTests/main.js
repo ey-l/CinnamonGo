@@ -1,6 +1,11 @@
 
-function printNameOfDevice() {
+/*================================
 
+	FitBit Test Functions
+	
+=================================*/
+
+function printNameOfDevice() {
 	navigator.bluetooth.requestDevice({
   	filters: [{
     	name: 'Alta HR'
@@ -15,8 +20,6 @@ function printNameOfDevice() {
   		return device.gatt.connect();
 	})
 	.catch(error => { console.log(error); });
-
-
 }
 
 function getBatteryLevel() {
@@ -50,4 +53,25 @@ function getBatteryLevel() {
 	.catch(error => { console.log(error); });
 	
 
+}
+
+/*================================
+
+	Raspberry Pi Test Functions
+	
+=================================*/
+function connectToCarWithKey(carKey) {
+	navigator.bluetooth.requestDevice({
+  	filters: [{
+    	name: carKey
+  	}],
+	})
+	.then(device => { 
+		// Human-readable name of the device.
+  		console.log("FOUND: " + device.name);
+
+  		// Attempts to connect to remote GATT Server.
+  		return device.gatt.connect();
+	})
+	.catch(error => { console.log(error); });
 }
