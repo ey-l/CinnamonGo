@@ -24,11 +24,6 @@ var descriptorFromCar = new Descriptor({
     value: 'Hello Phone!' // static value, must be of type Buffer or string if set
 });
 
-var descriptorToCar = new Descriptor({
-    uuid: 'fffffffffffffffffffffffffffffff4',
-    value: ''
-});
-
 /*=====================
 Characteristics
 ======================*/
@@ -56,11 +51,11 @@ var characteristicToCar = new Characteristic({
     uuid: 'fffffffffffffffffffffffffffffff3', 
     properties: [ 'write', 'read' ], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
     secure: [ 'write', 'read' ], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
-    value: null, // optional static value, must be of type Buffer - for read only characteristics
-    descriptors: [
-        descriptorToCar
-    ],
-    onReadRequest: null, // optional read request handler, function(offset, callback) { ... }
+    value: null,
+    descriptors: [],
+    onReadRequest: function() {
+    	console.log("Someone Requested to read!");
+    }, // optional read request handler, function(offset, callback) { ... }
     onWriteRequest: function() {
     	console.log("Someone Requested to write!");
     }, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}

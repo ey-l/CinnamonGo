@@ -51,11 +51,10 @@ function connectToCarWithKey(carKey) {
 	/*=================
 	Write To Car!
 	==================*/
-	.then(characteristic => characteristic.getDescriptor('ffffffff-ffff-ffff-ffff-fffffffffff4'))
-	.then(descriptor => {
+	.then(characteristic => {
 		let encoder = new TextEncoder('utf-8');
 		let userReply = encoder.encode(msgToCar);
-		return descriptor.writeValue(userReply);
+		return characteristic.writeValue(userReply);
 	})
 	.then(function() {
 		console.log('Written.');
