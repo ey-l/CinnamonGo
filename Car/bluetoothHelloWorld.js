@@ -54,17 +54,15 @@ var characteristicFromCar = new Characteristic({
 
 var characteristicToCar = new Characteristic({
     uuid: 'fffffffffffffffffffffffffffffff3', 
-    properties: [ 'read', 'write' ], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
-    secure: [ 'read', 'write' ], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
+    properties: [ 'write' ], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
+    secure: [ 'write' ], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
     value: null, // optional static value, must be of type Buffer - for read only characteristics
     descriptors: [
         descriptorToCar
     ],
-    onReadRequest: function() {
-    	console.log("Someone asked to read!");
-    }, // optional read request handler, function(offset, callback) { ... }
+    onReadRequest: null, // optional read request handler, function(offset, callback) { ... }
     onWriteRequest: function() {
-    	console.log("Someone Requested to read!");
+    	console.log("Someone Requested to write!");
     }, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
     onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
     onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
