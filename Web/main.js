@@ -1,12 +1,14 @@
 const jsMapsKey = "AIzaSyBZ061PQh_GKGahPYyV1ET8aNvrFDdPTLk"
 
-// jQuery widget enables seletable list
+$(document).ready(function() {
 
-$( function() {
+	$( function() {
 
-	// enable selectable widget on list
-    $( "#selectable" ).selectable();
+		// enable selectable widget on list
+    	$( "#selectable" ).selectable();
 
-    // pass selected car to 
+    	// pass the selected car's key to 
 
- } );
+ 	} );
+
+});
