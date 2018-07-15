@@ -66,7 +66,7 @@ Main handlers
 
 console.log("Starting bleno...");
 
-bleno.setServices(PrimaryService);
+bleno.setServices([PrimaryService]);
 
 bleno.on("stateChange", state => {
 	if (state === 'poweredOn') {
@@ -91,5 +91,10 @@ bleno.on('advertisingStop', function() {
 
 bleno.on('accept', function(clientAddress) {
 	console.log("Hooray! someone connected! Address:");
+	console.log(clientAddress);
+});
+
+bleno.on('disconnect', function(clientAddress) {
+	console.log("Someone just disconnected... Address:");
 	console.log(clientAddress);
 });
