@@ -9,3 +9,7 @@ $ systemctl status bluetooth
 
 # Start bluetooth if not running
 $ sudo systemctl start bluetooth
+
+# ACTUALLY Start bluetooth (stuff above is obsolete, since the migration to bleno js)
+
+$ sudo hciconfig hci0 up

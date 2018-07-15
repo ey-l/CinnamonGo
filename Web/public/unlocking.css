@@ -3,17 +3,7 @@ body {
 	text-align: center;
 }
 
-#body1{
-	display: none;
-	position: relative;
-	top: 200px;
-	margin: auto;
-	padding: 10px;
-	padding-bottom: 0;
-	width: 60%;
-}
-
-#body2 {
+#body1, #body2, #body3{
 	display: none;
 	position: relative;
 	top: 200px;
