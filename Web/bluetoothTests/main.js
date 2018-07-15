@@ -38,7 +38,6 @@ function connectToCarWithKey(carKey) {
 		gattService = service;
 		return service.getCharacteristic('ffffffff-ffff-ffff-ffff-fffffffffff1');
 	})
-	.then(service => )
 	.then(characteristic => characteristic.getDescriptor('ffffffff-ffff-ffff-ffff-fffffffffff2'))
 	.then(descriptor => descriptor.readValue())
 	.then(value => {
