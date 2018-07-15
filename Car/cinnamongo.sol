@@ -26,7 +26,7 @@ contract CinnamonGo {
 	
 	/* This is the constructor which will be called once when you
 	*/
-	function CinnamonGo() {
+	function CinnamonGo(uint randomNumber) {
 		carDevice = msg.sender;
 		balances[msg.sender] = 1000;
 	}
