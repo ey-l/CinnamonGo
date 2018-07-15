@@ -1,6 +1,5 @@
 Web3 = require('web3');
-web3 = new Web3(Web3.currentProvider);
-//web3 = new Web3(new Web3.providers.HttpProvider("localhost:8545"));
+web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 fs = require('fs');
 code = fs.readFileSync('cinnamongo.sol').toString();
 solc = require('solc');
