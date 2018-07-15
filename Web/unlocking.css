@@ -3,8 +3,18 @@ body {
 	text-align: center;
 }
 
-#body{
-	display: block;
+#body1{
+	display: none;
+	position: relative;
+	top: 200px;
+	margin: auto;
+	padding: 10px;
+	padding-bottom: 0;
+	width: 60%;
+}
+
+#body2 {
+	display: none;
 	position: relative;
 	top: 200px;
 	margin: auto;

@@ -5,26 +5,41 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link href="readytogo.css" type="text/css" rel="stylesheet">
+	<link href="unlocking.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<script src="jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="readytogo.js"></script>
+	<script type="text/javascript" src="unlocking.js"></script>
 
 </head>
 
 
 <body>
 
-	<div id="body">
+	<div id="body0">
 
-		<a href="unlocking.html">
-			<i class="fas fa-play-circle" id="go-button" alt="Let's Go!"></i>
-		</a>
+		<i class="fas fa-play-circle" id="go-button" alt="Let's Go!" onclick="startUnlocking()"></i>
 		<p>Unlock My Car</p>
 
 		<a href="index.html">
 			<i class="fas fa-arrow-alt-circle-left" id="back-button" alt="Go Back"></i>
 		</a>
+
+	</div>
+
+	<div id="body1">
+
+		<i class="fas fa-spinner fa-spin" id="unlocking-icon" alt="We're Unlocking Your Car!"></i>
+		<p id="countDown">30s</p>
+		<p>Unlocking...</p>
+
+		<i class="fas fa-times" id="back-button" alt="Go Back" onclick="returnToUnlock()"></i>
+
+	</div>
+
+	<div id="body2">
+
+		<p>You Have Unlocked Your Car!</p>
 
 	</div>
 
