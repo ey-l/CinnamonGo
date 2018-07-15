@@ -5,6 +5,7 @@
 =================================*/
 var connected = false;
 var gattServer = undefined;
+var gattService = undefined;
 
 /*================================
 
@@ -33,7 +34,11 @@ function connectToCarWithKey(carKey) {
 		connected = true;
 		return server.getPrimaryService('ffffffff-ffff-ffff-ffff-fffffffffff0')
 	})
-	.then(service => service.getCharacteristic('ffffffff-ffff-ffff-ffff-fffffffffff1'))
+	.then(function(service) {
+		gattService = service;
+		return service.getCharacteristic('ffffffff-ffff-ffff-ffff-fffffffffff1');
+	})
+	.then(service => )
 	.then(characteristic => characteristic.getDescriptor('ffffffff-ffff-ffff-ffff-fffffffffff2'))
 	.then(descriptor => descriptor.readValue())
 	.then(value => {
@@ -50,12 +55,11 @@ function connectToCarWithKey(carKey) {
 
 function writeToCar(msg) {
 	if(connected) {
-		gattServer.getPrimaryService('ffffffff-ffff-ffff-ffff-fffffffffff0')
-		.then(service => service.getCharacteristic('ffffffff-ffff-ffff-ffff-fffffffffff3'))
+		gattService.getCharacteristic('ffffffff-ffff-ffff-ffff-fffffffffff3')
 		.then(characteristic => characteristic.getDescriptor('ffffffff-ffff-ffff-ffff-fffffffffff4'))
 		.then(descriptor => {
 			let encoder = new TextEncoder('utf-8');
-			let userReply = encoder.encode('Hello Car!');
+			let userReply = encoder.encode(msg);
 			return descriptor.writeValue(userReply);
 		})
 
@@ -66,6 +70,9 @@ function writeToCar(msg) {
 			console.log('User Description: ' + decoder.decode(value));
 			writeToCar('Hello Car!');
 		})
+		.catch(function(err) {
+			console.log(err);
+		});
 	}
 	else {
 		throw "Not connected yet..."
