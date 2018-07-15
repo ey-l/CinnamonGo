@@ -24,8 +24,6 @@ var descriptorFromCar = new Descriptor({
     value: 'Hello Phone!' // static value, must be of type Buffer or string if set
 });
 
-var Descriptor = bleno.Descriptor;
-
 var descriptorToCar = new Descriptor({
     uuid: 'fffffffffffffffffffffffffffffff4',
     value: ''
@@ -55,7 +53,7 @@ var characteristicFromCar = new Characteristic({
 });
 
 var characteristicToCar = new Characteristic({
-    uuid: 'fffffffffffffffffffffffffffffff3', // or 'fff1' for 16-bit
+    uuid: 'fffffffffffffffffffffffffffffff3', 
     properties: [ 'write' ], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
     secure: [ 'write' ], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
     value: null, // optional static value, must be of type Buffer - for read only characteristics
@@ -64,7 +62,7 @@ var characteristicToCar = new Characteristic({
     ],
     onReadRequest: null, // optional read request handler, function(offset, callback) { ... }
     onWriteRequest: function() {
-    	console.log("Someone Requested to read!")
+    	console.log("Someone Requested to read!");
     }, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
     onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
     onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
