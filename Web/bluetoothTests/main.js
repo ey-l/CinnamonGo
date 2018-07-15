@@ -65,23 +65,29 @@ function connectToCarWithKey(carKey) {
 		filters: [{
     		name: carKey
   		}],
+  		optionalServices: ['ffffffff-ffff-ffff-ffff-fffffffffff0']
 	})
 	.then(device => { 
 		// Human-readable name of the device.
   		console.log("FOUND: " + device.name);
+  		
+  		document.getElementById("outputDiv").innerText = "Found Device:" + device.name;
 
   		// Attempts to connect to remote GATT Server.
   		return device.gatt.connect();
   		
 	})
-	.then(device => device.gatt.connect())
-	.then(server => server.getPrimaryService('fffffffffffffffffffffffffffffff0'))
-	.then(service => service.getCharacteristic('fffffffffffffffffffffffffffffff1'))
-	.then(characteristic => characteristic.getDescriptor('2901'))
+	.then(server => server.getPrimaryService('ffffffff-ffff-ffff-ffff-fffffffffff0'))
+	.then(service => service.getCharacteristic('ffffffff-ffff-ffff-ffff-fffffffffff1'))
+	.then(characteristic => characteristic.getDescriptor('ffffffff-ffff-ffff-ffff-fffffffffff2'))
 	.then(descriptor => descriptor.readValue())
 	.then(value => {
   		let decoder = new TextDecoder('utf-8');
+  		document.getElementById("outputDiv").innerText += decoder.decode(value);
   		console.log('User Description: ' + decoder.decode(value));
   	})
-	.catch(error => { console.log(error); });
+	.catch(error => {
+		console.log(error);
+  		document.getElementById("outputDiv").innerText += "Error:" + error;		
+	});
 }

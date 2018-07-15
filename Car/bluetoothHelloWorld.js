@@ -20,7 +20,7 @@ Descriptor
 var Descriptor = bleno.Descriptor;
 
 var descriptor = new Descriptor({
-    uuid: '2901',
+    uuid: 'fffffffffffffffffffffffffffffff2',
     value: 'Hello World' // static value, must be of type Buffer or string if set
 });
 
