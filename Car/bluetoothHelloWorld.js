@@ -61,10 +61,11 @@ var primaryService = new PrimaryService({
 });
 
 /*=====================
-Main code
+Main handlers
 ======================*/
 
 console.log("Starting bleno...");
+
 bleno.on("stateChange", state => {
 	if (state === 'poweredOn') {
 		console.log("Starting broadcast...");
@@ -73,4 +74,20 @@ bleno.on("stateChange", state => {
 		console.log("Stopping broadcast...");
 		bleno.stopAdvertising();
 	}        
+});
+
+bleno.on('advertisingStart', function(error) {
+	console.log("Advertising has started.");
+	if(error) {
+		console.log(error);
+	}
+});
+
+bleno.on('advertisingStop', function() {
+	console.log("Advertising has stopped.");	
+});
+
+bleno.on('accept', function(clientAddress) {
+	console.log("Hooray! someone connected! Address:");
+	console.log(clientAddress);
 });
