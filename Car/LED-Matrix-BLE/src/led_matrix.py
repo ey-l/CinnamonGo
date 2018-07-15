@@ -56,7 +56,7 @@ def int_to_hex(int_value):
 
 
 def set_display_pixel(display, row, column, value):
-    printf "Display row: " + row + " and col " + column + " and value" + value
+    print 'Display row: ' + str(row) + ' and col ' + str(column) + ' and value' + str(value)
 
 
 def set_display_row(display, row, byte_values):
@@ -73,7 +73,7 @@ def set_display_row(display, row, byte_values):
     -------+-----+-----+-----+-----+-----+-----+-----+-----
     Byte   |           0           |           1
     """
-    printf "Displaying" + row + " value" + byte_values
+    print 'Displaying' + str(row) + ' value' + str(byte_values)
 
 class RowChrc(Characteristic):
     ROW_UUID = '12345678-1234-5678-1234-56789abc000'
