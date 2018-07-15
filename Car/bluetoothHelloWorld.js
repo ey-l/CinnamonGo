@@ -81,7 +81,7 @@ var PrimaryService = bleno.PrimaryService;
 var primaryService = new PrimaryService({
     uuid: 'fffffffffffffffffffffffffffffff0', // or 'fff0' for 16-bit
     characteristics: [
-        [characteristicToCar, characteristicFromCar]
+        characteristicToCar, characteristicFromCar
     ]
 });
 
