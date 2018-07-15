@@ -68,14 +68,9 @@ console.log("Starting bleno...");
 bleno.on("stateChange", state => {
 	if (state === 'poweredOn') {
 		console.log("Starting broadcast...");
-		bleno.startAdvertising(name, serviceUuids[, callback(error)]);
+		bleno.startAdvertising(name, serviceUuids);
 	} else {
 		console.log("Stopping broadcast...");
 		bleno.stopAdvertising();
 	}        
 });
-
-var name = 'name';
-var serviceUuids = ['fffffffffffffffffffffffffffffff0']
-
-bleno.startAdvertising(name, serviceUuids[, callback(error)]);
