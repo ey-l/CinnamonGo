@@ -66,6 +66,8 @@ Main handlers
 
 console.log("Starting bleno...");
 
+bleno.setServices(PrimaryService);
+
 bleno.on("stateChange", state => {
 	if (state === 'poweredOn') {
 		console.log("Starting broadcast...");
